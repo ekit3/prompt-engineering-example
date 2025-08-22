@@ -1,0 +1,60 @@
+# Circular Dependencies - Backend Project (Java)
+
+This document outlines how to avoid and detect circular dependencies in our Java codebase.
+
+## What is a Circular Dependency?
+
+A circular dependency occurs when two or more modules, classes, or packages directly or indirectly depend on each other.
+
+* **Direct:** Class or module A imports/uses B, and B imports/uses A.
+* **Indirect:** A depends on B, B depends on C, and C depends on A.
+
+### Example (Java):
+```java
+// UserService.java
+import com.example.ekite.repository.UserRepository;
+// ...
+
+// UserRepository.java
+import com.example.ekite.service.UserService; // This creates a circular dependency
+// ...
+```
+
+## Why Avoid Them?
+
+1. **Unpredictable Behavior:** Can lead to runtime errors, stack overflows, or partially initialized objects.
+2. **Reduced Maintainability:** Makes the codebase harder to reason about and refactor. Changes in one module can have unexpected ripple effects.
+3. **Build/Tooling Issues:** Can cause problems with build tools, dependency injection frameworks, or static analysis.
+
+## How to Avoid and Resolve
+
+1. **Identify Shared Concerns:** If two modules depend on each other, extract shared logic into a third, lower-level module or package (e.g., `common`, `utils`, or `domain`).
+2. **Dependency Inversion Principle (DIP):**
+    * Depend on abstractions (interfaces in Java), not concretions.
+    * Use dependency injection to decouple implementations.
+3. **Re-evaluate Module Boundaries:**
+    * Are your packages/classes doing too much? Consider splitting responsibilities.
+    * Is the project structure logical? Refer to `.github/agent/structure.mdc`.
+4. **Avoid Static Imports Across Layers:**
+    * In Java, avoid static imports or direct references between service and repository layers in both directions.
+5. **Move Functionality:**
+    * Sometimes, moving a method or class to a different module can break the cycle.
+6. **Use Factories or Providers:**
+    * For complex dependency graphs, use factories or providers to manage object creation and dependencies.
+
+## Detecting Circular Dependencies
+
+1. **Static Analysis Tools:**
+    * Use SonarQube or similar tools for Java to detect cycles in package/class dependencies.
+2. **Manual Code Review:**
+    * During code reviews, pay attention to import statements and the overall dependency graph.
+3. **Build/Runtime Errors:**
+    * Be alert for stack overflows, initialization errors, or import errors, which may indicate a cycle.
+
+## LLM Responsibility
+
+* **Proactive Avoidance:** When generating or modifying code, avoid introducing new circular dependencies.
+* **Refactoring Suggestions:** If a cycle is found, suggest or implement refactoring (e.g., extract shared logic, introduce interfaces, restructure packages).
+* **Adherence to Static Analysis:** Write code that passes SonarQube (Java) checks for circular dependencies.
+
+---

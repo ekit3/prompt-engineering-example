@@ -1,0 +1,73 @@
+# API Interaction Guidelines - Backend Project
+
+This document provides guidelines for designing, implementing, and documenting backend APIs in this project (Java, OpenAPI/Swagger).
+
+## API Design Principles
+
+- Use OpenAPI/Swagger specifications (see `docapi/static/swagger.yaml`) to define and document all API endpoints, parameters, request/response models, and error codes.
+- Maintain clear, up-to-date descriptions and provide example requests and responses for each endpoint.
+- Return meaningful, consistent error messages and document them in the API spec.
+
+## Organizing Code Structure
+
+Recommended backend classic organization (Java example):
+```
+src/main/java/com/example/
+├── ekite/                 # Main business domain package (example)
+│   ├── controller/        # REST controllers (entry points)
+│   ├── service/           # Business logic/services
+│   ├── repository/        # Data access layer
+│   ├── model/             # Domain models/entities
+│   ├── dto/               # Data Transfer Objects (request/response)
+│   └── ...
+└── ... (other domains)
+```
+
+## Testing Recommendations
+
+- Use JUnit for unit and integration tests.
+- Mock external dependencies (e.g., with Mockito).
+- Test both success and error scenarios for all API endpoints.
+- Ensure error handling and edge cases are covered.
+
+## Development Process
+
+1. **Analyze Requirements**
+   - Identify data needs and API endpoints.
+   - Define request/response models (DTOs for Java if used).
+   - Update OpenAPI/Swagger spec accordingly.
+
+2. **Check Existing Code**
+   - Look for similar patterns in existing controllers, services, and tests.
+   - Reuse and adapt proven patterns for consistency.
+
+3. **Implement Service Layer**
+   - Write pure functions/classes for business logic.
+   - Keep controllers thin; delegate logic to services.
+   - Use dependency injection where possible.
+
+4. **Document and Test**
+   - Update OpenAPI/Swagger documentation.
+   - Write and run tests for all new endpoints and logic.
+   - Provide example requests/responses and document error cases.
+
+## Documentation & Examples
+
+- Keep OpenAPI/Swagger specs up to date in `docapi/static/swagger.yaml`.
+- Include example requests and responses for each endpoint.
+- Document all error codes and messages.
+
+## Modularity & Best Practices
+
+- Group code by feature/domain for high cohesion and low coupling.
+- Use interfaces and DTOs to define clear boundaries between layers.
+- Avoid global state; keep logic stateless where possible.
+- Use dependency injection/context objects for shared resources.
+
+## Further Reading
+
+- See `docapi/static/swagger.yaml` for API contracts and examples.
+- Review existing Java packages for structure and patterns.
+- Refer to OpenAPI and Swagger documentation for best practices.
+
+---

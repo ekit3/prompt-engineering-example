@@ -1,0 +1,57 @@
+# Project Structure
+
+This document describes the actual structure of the project, which is backend-oriented (Java, Docker, technical documentation).
+
+## Project Structure
+
+/
+|-- build.sh                  # Main build script
+|-- Makefile                  # Build tasks and utilities
+|-- pom.xml                   # Maven configuration (Java backend)
+|-- README.md                 # Main project documentation
+|-- sonar-project.properties  # SonarQube configuration
+|-- overview.md               # Project overview
+|-- doc/                      # Technical documentation (diagrams, etc.)
+|   |-- sequence_diagram/
+|-- docapi/                   # API documentation (Hugo, Swagger, etc.)
+|   |-- config.toml
+|   |-- README.md
+|   |-- archetypes/
+|   |-- content/
+|   |-- layouts/
+|   |-- static/
+|   |-- themes/
+|-- docker/                   # Docker files and container configuration
+|   |-- docker-compose.yml
+|   |-- Dockerfile
+|-- modules/                  # Java backend modules
+|   |-- user-back/
+|       |-- target/
+|-- src/                      # Main source code
+|   |-- main/
+|   |   |-- java/             # Main Java code (e.g., com/example/ekite...)
+|   |   |-- resources/        # YAML configuration files, resources
+|   |-- test/
+|       |-- java/             # Java unit tests
+|-- target/                   # Maven build output (generated)
+
+## Naming Conventions
+
+* **Java**: packages in lowerCamelCase, classes in PascalCase.
+* **YAML**: configuration files in kebab-case or snake_case.
+* **Documentation**: Markdown files in kebab-case or snake_case.
+
+## Modularity Principles
+
+- Each major concern (Java backend, documentation, Docker, etc.) is isolated in its own top-level directory.
+- Java code is organized by package and module, following standard Maven conventions for separation of main and test code.
+- Documentation and API docs are separated from code and from each other, making it easy to update or extend them independently.
+- Docker and deployment configuration are kept in their own directory, decoupled from application logic.
+- Generated files (e.g., target/) are never mixed with source code.
+- When adding new features or utilities, always place them in the most relevant subdirectory to maintain high cohesion and low coupling.
+- Avoid mixing unrelated logic in the same directory; document the purpose of each module or folder for clarity.
+
+## Notes
+
+- The structure is tailored for a Java backend (Maven) and API documentation (Hugo/Swagger).
+- The `target/` folder and some subfolders are generated automatically during build.

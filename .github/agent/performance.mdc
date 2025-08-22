@@ -1,0 +1,28 @@
+# Performance Guidelines - Backend Project (Java)
+
+This document outlines principles and practices for writing performant code in our backend Java applications.
+
+## General Principles
+
+1. **Measure First:** Before optimizing, identify actual performance bottlenecks using profiling tools (e.g., VisualVM, JProfiler, JMeter, YourKit for Java). Avoid premature optimization.
+2. **Target Critical Paths:** Focus optimization efforts on frequently used endpoints, database queries, or operations known to be slow.
+3. **Understand the "Why":** When applying an optimization technique, understand why it helps and its potential trade-offs (e.g., increased code complexity).
+
+## Backend Performance Best Practices
+
+1. **Avoid Costly Operations in Loops:** Optimize algorithms and avoid repeated database queries or heavy computations inside loops.
+2. **Batch Processing:** Group database or network operations to minimize round-trips and improve throughput.
+3. **Profiling & Monitoring:** Use profiling and monitoring tools to identify slow code paths, memory leaks, or resource contention.
+4. **Memory Management:** Monitor for memory leaks, optimize object usage, and release resources (files, connections) promptly.
+5. **Parallelization/Asynchronous Processing:** Use threads, thread pools, or async frameworks for long-running or parallelize tasks.
+6. **Efficient Logging:** Avoid excessive logging in performance-critical paths and use efficient string formatting.
+7. **Database Optimization:** Use indexes, avoid N+1 queries, and write efficient SQL/join statements.
+8. **Error Handling:** Handle exceptions efficiently and avoid expensive operations in catch blocks.
+9. **Configuration:** Tune JVM runtime and database connection pool settings for your workload.
+
+## LLM Considerations
+
+* When generating code, prioritize readability and correctness first.
+* Apply optimizations only if a real performance need is identified.
+* Suggest improvements for heavy computations, I/O, or inefficient algorithms.
+* Document any performance-sensitive code and explain trade-offs if complexity is introduced.

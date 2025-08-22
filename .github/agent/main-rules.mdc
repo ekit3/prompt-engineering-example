@@ -1,0 +1,14 @@
+# Main Project Rules - Backend Project (Java)
+
+This document outlines the core principles that guide all development work on this project. These are foundational and apply universally.
+
+1.  **User-Centricity:** Always prioritize the user experience. Features should be intuitive, accessible, and performant (for backend, this means clear APIs, good documentation, and reliable performance).
+2.  **Code Quality & Maintainability:** Write clean, readable, well-documented, and easily maintainable code. Strive for simplicity and avoid over-engineering.
+3.  **Consistency:** Adhere to established patterns, conventions, and styles across the codebase. This applies to coding style, architecture, and naming.
+4.  **Collaboration & Communication:** Ask questions when unsure. Clearly explain your changes and reasoning. Be prepared to review and be reviewed.
+5.  **Testing is Key:** Code should be written with testability in mind. Aim for high conceptual test coverage and maintain automated tests.
+6.  **Performance Matters:** Be mindful of performance implications. Optimize critical paths and avoid introducing regressions.
+7.  **Security by Design:** Consider security implications in all development work. Follow best practices to prevent common vulnerabilities.
+8.  **Iterative Development:** Embrace an iterative approach. Deliver value in increments and be open to feedback and adjustments.
+9.  **Respect the Toolchain:** Utilize and respect the project's established toolchain (linters, formatters, build tools, static analysis). Do not introduce new tools without discussion.
+10. **Existing Code is Precedent:** When in doubt about a convention or approach, look at existing, well-regarded parts of the codebase for guidance, but always prioritize documented rules if there's a conflict.

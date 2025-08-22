@@ -1,0 +1,97 @@
+# Testing Guidelines - Spring Boot Backend
+
+This document outlines the approach and best practices for testing in this backend project (Java, Spring Boot).
+
+## General Principles
+
+1. **Testable Code:**
+   - Write small, focused classes and methods.
+   - Use dependency injection to allow mocking and stubbing.
+   - Avoid side effects in utility methods and services where possible.
+2. **Test Pyramid:**
+   - **Unit Tests (Most Numerous):** Test individual classes/methods in isolation (mock dependencies).
+   - **Integration Tests:** Test the interaction between multiple components (e.g., service + repository, REST controller + service). Use real or in-memory databases (e.g., H2) when possible.
+   - **End-to-End (E2E) Tests (Fewest):** Test full application flows (e.g., HTTP requests to REST endpoints).
+3. **Confidence, Not Just Coverage:**
+   - Write tests that validate important behaviors, edge cases, and error handling—not just to increase coverage.
+
+## Unit Tests
+
+- **Focus:** Test the smallest units (methods, classes) in isolation.
+- **Mocking:** Use Mockito to mock dependencies (repositories, services, external APIs).
+- **When mocking dependencies, always mock the return values of nested objects as well (e.g., if a mocked method returns an object, also mock the methods used on that returned object). This prevents NullPointerExceptions during test execution.**
+- **Naming:** Name test classes `[ClassName]Test.java` and methods clearly describe the scenario and expected outcome.
+- **Structure:** Use JUnit 5 (`@Test`, `@BeforeEach`, `@AfterEach`, etc.).
+- **What to Test:**
+  - Happy path (expected/typical inputs)
+  - Edge cases (null, empty, large, invalid inputs)
+  - Error handling (exceptions, invalid states)
+  - Conditional logic (all branches)
+
+## Integration Tests
+
+- **Focus:** Test how multiple components work together (e.g., REST controller + service + repository).
+- **Spring Boot Test:** Use `@SpringBootTest`, `@DataJpaTest`, or `@WebMvcTest` as appropriate.
+- **Database:** Use in-memory DB (H2) or test containers for DB integration.
+- **Mocking:** Mock only external systems (e.g., third-party APIs), not internal beans.
+- **Setup/Teardown:** Use JUnit lifecycle hooks and Spring test utilities for setup/cleanup.
+
+## End-to-End (E2E) Tests
+
+- **Focus:** Test real HTTP requests and full application flows.
+- **Tools:** Use MockMvc, TestRestTemplate, or RestAssured for HTTP endpoint testing.
+- **Scenarios:** Cover main user flows, authentication, and error cases.
+
+## Test File Organization
+
+- Java: Place tests in `src/test/java/` mirroring the main package structure.
+
+## Test Setup and Teardown
+
+- Use JUnit's `@BeforeEach`, `@AfterEach`, `@BeforeAll`, `@AfterAll` for setup/cleanup.
+- For Spring, use `@DirtiesContext` or test-specific configuration if needed.
+
+## LLM Contribution to Testing
+
+- When providing code, describe the types of tests to write, key scenarios, and edge cases.
+- Ensure code is structured for testability (dependency injection, clear separation of concerns).
+
+## Notes
+
+- Do not include front-end/component/UI testing instructions in this backend project.
+- Focus on backend logic, API, data, and integration testing.
+
+## Maximum Coverage Objective
+
+- Each unit test file must aim to cover 100% of instructions, branches, conditions, and execution paths of the tested file.
+- For every public method, write tests that cover:
+  - Nominal cases (success)
+  - Error and exception cases (e.g., invalid inputs, failing dependencies)
+  - Edge cases and extreme values
+  - All conditional branches (if/else, switch, try/catch, etc.)
+- Use coverage tools (e.g., Jacoco) to identify untested code and add targeted tests.
+- If a code path cannot be tested (e.g., external dependency, dead code), document it in the test file with a comment: `// NOT TESTED: ...` and provide a justification.
+
+## Best Practices
+
+- Always mock the return values of nested objects to prevent NullPointerExceptions in tests.
+- Use mocks, stubs, or fakes to isolate business logic and control external dependencies.
+- Verify side effects, interactions with dependencies, and final expected states.
+- Document both tested and untested cases (with justification if not relevant).
+- Review and complete tests with every source code modification.
+
+## Robustness and Maintainability
+
+- Tests must be independent, reproducible, and fast.
+- Prefer readable and clear assertions.
+- Clean up resources and reset state between tests.
+- Add regression tests for every fixed bug.
+
+## Coverage Monitoring
+
+- Regularly analyze coverage reports and aim for continuous improvement.
+- Add tests for every uncovered branch or path detected.
+
+---
+
+By applying these rules, each test file must guarantee maximum coverage, increased robustness, and clear documentation of tested and untested cases.

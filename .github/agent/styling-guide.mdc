@@ -1,0 +1,7 @@
+# Styling Guide - Backend Context
+
+This project does not contain any front-end code or visual components.
+
+No CSS, responsiveness, visual accessibility, or style file organization rules apply here.
+
+If a web user interface is added in the future, an appropriate front-end styling guide should be defined or adopted.
