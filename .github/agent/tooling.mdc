@@ -1,0 +1,60 @@
+# Project Tooling - Spring Boot Backend
+
+This document outlines the key development tools used in this backend project. LLMs should generate code compatible with these tools and their configurations.
+
+## Build & Dependency Management
+
+* **Primary:** Maven
+* **Configuration:** `pom.xml`
+    * Use Maven for building, testing, packaging, and dependency management.
+    * Common commands:
+        * `mvn clean install` – build and run all tests
+        * `mvn test` – run tests only
+        * `mvn spring-boot:run` – run the application
+    * Use the Maven wrapper (`./mvnw`) if available for consistent builds.
+
+## Version Control
+
+* **System:** Git
+* **Hosting:** (e.g., GitHub, GitLab, Bitbucket)
+* Follow branching and commit message guidelines specified in `.github/feature-development.mdc`.
+
+## Linters, Formatters & Static Analysis
+
+1.  **Checkstyle:**
+    * **Purpose:** Enforce Java code style and standards.
+    * **Configuration:** `checkstyle.xml` (if present) or Maven plugin.
+    * **Expectation:** Code should pass Checkstyle checks.
+2.  **SpotBugs/FindBugs:**
+    * **Purpose:** Static analysis for bug detection and code quality.
+    * **Configuration:** Maven plugin.
+    * **Expectation:** Code should not introduce new warnings.
+3.  **SonarQube:**
+    * **Purpose:** Continuous inspection of code quality and security.
+    * **Configuration:** `sonar-project.properties`.
+    * **Expectation:** Code should meet SonarQube quality gates.
+4.  **Formatter:**
+    * Use IDE-integrated Java formatters (e.g., Google Java Format, Eclipse formatter) for consistent code style.
+
+## Testing Tools
+
+* **JUnit 5:** For unit and integration testing (Java).
+* **Mockito:** For mocking dependencies in tests.
+* **Spring Boot Test:** For integration and end-to-end testing of Spring components.
+* **Testcontainers:** For integration tests with real services (e.g., databases).
+
+## Scripting & Automation
+
+* **Makefile** and `build.sh` for build, test, and utility automation.
+* Use shell scripts for custom tasks as needed.
+
+## Editor/IDE Integration (Recommended for Human Developers)
+
+* Use an IDE like IntelliJ IDEA or Eclipse with Maven, Checkstyle, and SonarLint plugins.
+* Enable auto-formatting and static analysis in your editor.
+
+## Containerization & Deployment
+
+* **Docker:**
+    * Use `Dockerfile` and `docker-compose.yml` for building and running containers.
+    * Use Docker for local development, testing, and deployment.

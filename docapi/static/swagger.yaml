@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  title: User API
+  version: 1.0.0
+  description: API CRUD for user management
+
+paths:
+  /users:
+    get:
+      operationId: getUsers
+      tags:
+        - user
+      summary: list all users
+      responses:
+        '200':
+          description: List all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      operationId: createUser
+      tags:
+        - user
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /users/{id}:
+    get:
+      operationId: getUserById
+      tags:
+        - user
+      summary: Get user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: user not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: updateUser
+      tags:
+        - user
+      summary: Update an existing user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: user not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteUser
+      tags:
+        - user
+      summary: Delete a user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted successfully
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Jean Dupont
+        email:
+          type: string
+          example: jean.dupont@email.com
+    UserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jean Dupont
+        email:
+          type: string
+          example: jean.dupont@email.com
+      required:
+        - name
+        - email
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: User not found
+        status:
+          type: integer
+          example: 404

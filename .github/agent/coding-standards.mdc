@@ -1,0 +1,50 @@
+# Coding Standards - Backend Project (Java)
+
+These standards ensure consistency, readability, and maintainability of the Java code in this project.
+
+## Java
+
+1. **Strict Typing & Interfaces:**
+    * Use explicit types for variables, method parameters, and return types.
+    * Use interfaces for service and repository abstractions. Prefer dependency injection for implementation wiring.
+    * Use DTOs (Data Transfer Objects) for request/response payloads and keep them separate from domain models.
+2. **Naming Conventions:**
+    * **Packages:** lower_case (e.g., `com.example.ekite`)
+    * **Classes/Interfaces/Enums:** PascalCase (e.g., `UserService`, `UserRepository`)
+    * **Methods/Variables:** camelCase (e.g., `getUserInfo`, `userId`)
+    * **Constants:** UPPER_SNAKE_CASE (e.g., `USER_NAME`)
+3. **Immutability:**
+    * Use `final` for fields and variables that should not change after initialization.
+    * Prefer immutable objects for DTOs and value objects.
+4. **Error Handling:**
+    * Use checked exceptions for recoverable errors and unchecked for programming errors.
+    * Always log exceptions with context. Return meaningful error messages in API responses.
+5. **Formatting & Style:**
+    * Follow the Google Java Style Guide or your team's agreed conventions.
+    * Use consistent indentation (4 spaces recommended).
+    * Use Javadoc for public classes and methods.
+6. **Imports:**
+    * Organize imports: 1. Java standard, 2. Third-party, 3. Project-specific.
+    * Avoid wildcard imports.
+7. **Testing:**
+    * Use JUnit for unit and integration tests.
+    * Use Mockito for mocking dependencies.
+    * Mirror the main code structure in `src/test/java`.
+    * Cover both success and error scenarios.
+
+## General Coding Style
+
+1. **Keep Functions/Methods Small:** Focus each function/method on a single responsibility.
+2. **Avoid Magic Numbers/Strings:** Use named constants instead of hardcoding values.
+3. **Documentation:**
+    * Document complex logic and all public APIs/classes.
+    * Use meaningful comments and keep them up to date.
+4. **Code Reviews:**
+    * All code should be reviewed for readability, maintainability, and adherence to these standards.
+5. **Security:**
+    * Never hardcode secrets or credentials in code.
+    * Validate and sanitize all user input.
+6. **Static Analysis:**
+    * Use SonarQube for Java to catch code smells and potential issues.
+
+---

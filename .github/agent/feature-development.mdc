@@ -1,0 +1,52 @@
+# Feature Development Guidelines - Backend Project (Java)
+
+This document outlines the process and best practices for developing new features in this backend project.
+
+## Branching Strategy
+
+* All new features must be developed in separate feature branches, typically branched off the main development branch (e.g., `develop` or `main`).
+    * Branch naming convention: `feature/[ticket-id]-[short-description]` (e.g., `feature/BRO-123-user-create`).
+* Once a feature is complete, submit a Pull Request (PR) to merge it into the development branch.
+    * PRs should be small, focused, and address a single feature or piece of functionality.
+    * The PR description should clearly explain the changes, the problem being solved, and how to test it. Link to relevant tickets.
+    * Ensure all CI checks (linting, tests, build) pass before requesting a review.
+* All PRs must be reviewed by at least one other team member before merging. Address review comments and feedback.
+
+## Commit Messages
+
+* Follow conventional commit message format (e.g., `feat: add user create (BRO-123)`).
+    * `<type>: <subject> (optional scope: <ticket-id>)`
+    * Common types: `feat` (new feature), `fix` (bug fix), `chore` (build/tooling changes), `docs` (documentation), `style` (formatting), `refactor`, `test`.
+* Write clear, concise, and descriptive commit messages.
+
+## API Integration
+
+* When a new feature requires interaction with backend APIs:
+    * Define clear contracts for API requests and responses (e.g., OpenAPI/Swagger for Java).
+    * Handle API errors gracefully and document them.
+    * Place API call logic in dedicated service classes or modules.
+
+## Feature Flags / Experimentation (if applicable)
+
+* If the feature is part of an A/B test or needs to be toggled remotely:
+    * Integrate with the project's feature flagging system.
+    * Clearly document any feature flags used.
+    * Plan for cleanup of old flags and code paths once an experiment concludes.
+
+## Internationalization (i18n) & Localization (l10n) (if applicable)
+
+* If your backend exposes user-facing messages or logs, ensure they are localizable and follow your i18n conventions.
+
+## Documentation
+
+* Document new services, modules, or scripts, especially if they introduce new patterns or significant changes.
+* Update architectural or user-facing documentation as needed.
+
+## LLM Recommendations
+
+* When generating or reviewing code, always follow the branching, commit, and documentation guidelines above.
+* Ensure new features are modular, well-documented, and tested.
+* Propose refactoring or improvements if you identify code smells, anti-patterns, or opportunities for better maintainability.
+* If a guideline is ambiguous, prefer clarity, maintainability, and alignment with the rest of the codebase.
+
+---
